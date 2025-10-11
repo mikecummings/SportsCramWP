@@ -1,0 +1,369 @@
+/*
+Theme Name: Sports Cram
+Description: A clean, modern theme for Sports Cram Washington Commanders news
+Version: 1.0
+Author: Sports Cram
+*/
+
+:root {
+    --burgundy: #5a1414;
+    --gold: #d4af37;
+    --ink: #0f172a;
+    --muted: #475569;
+    --bg: #fff;
+    --bg-alt: #f8fafc;
+    --border: #e2e8f0;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(2, 6, 23, .08)
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial
+}
+
+a {
+    color: var(--burgundy);
+    text-decoration: none
+}
+
+a:hover {
+    opacity: .9
+}
+
+.wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 20px
+}
+
+.hero {
+    display: block;
+    border-radius: 28px;
+    padding: 32px;
+    background: linear-gradient(180deg, var(--bg-alt), #fff)
+}
+
+@media(min-width:900px) {
+    .hero {
+        padding: 48px
+    }
+}
+
+.badge {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: var(--burgundy);
+    box-shadow: var(--shadow)
+}
+
+        .title {
+            font-size: 28px;
+            line-height: 1.1;
+            margin: 14px 0 8px;
+            white-space: nowrap
+        }
+
+        @media(min-width:900px) {
+            .title {
+                font-size: 36px
+            }
+        }
+
+.subtitle {
+    color: var(--muted);
+    margin: 0 0 18px
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow)
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 10px
+}
+
+@media(min-width:680px) {
+    .form-row {
+        grid-template-columns: 2fr 1fr auto
+    }
+}
+
+input[type=email],
+input[type=text] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none
+}
+
+input[type=email]:focus,
+input[type=text]:focus {
+    border-color: var(--burgundy)
+}
+
+.btn {
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--burgundy);
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer
+}
+
+.btn:hover {
+    filter: brightness(.95)
+}
+
+.tiny {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 10px
+}
+
+.error {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 6px;
+    display: none
+}
+
+.success {
+    display: none;
+    border: 1px solid #bbf7d0;
+    background: #f0fdf4;
+    color: #14532d;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 10px
+}
+
+.visual {
+    position: relative;
+    min-height: 250px;
+    border-radius: 24px;
+    background: radial-gradient(1200px 600px at -10% 110%, rgba(212, 175, 55, .15), transparent 60%), radial-gradient(900px 500px at 110% -20%, rgba(90, 20, 20, .12), transparent 55%), linear-gradient(180deg, #fff, var(--bg-alt));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow)
+}
+
+.thank-you-message {
+    background-color: rgba(0, 0, 0, .6);
+    text-align: center;
+    padding: 50px 20px;
+    height: 250px;
+    color: #fff
+}
+
+.chip {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: var(--shadow);
+    font-weight: 600
+}
+
+.chip svg {
+    width: 18px;
+    height: 18px
+}
+
+.chip-1 {
+    top: 20px;
+    left: 20px
+}
+
+.chip-2 {
+    top: 90px;
+    right: 20px
+}
+
+.chip-3 {
+    bottom: 24px;
+    left: 28px
+}
+
+.section {
+    padding: 36px 0
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px
+}
+
+@media(min-width:900px) {
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+.feature {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px
+}
+
+.feature h3 {
+    margin: 8px 0 6px
+}
+
+.highlight {
+    background: var(--bg-alt);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    padding: 16px
+}
+
+.faq details {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px
+}
+
+.faq details+details {
+    margin-top: 12px
+}
+
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    color: var(--muted);
+    font-size: 14px
+}
+
+.legal a {
+    color: inherit;
+    text-decoration: underline
+}
+
+header {
+    background: #fff;
+    color: var(--ink);
+    text-align: center;
+    padding: 1rem 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+}
+
+header img {
+    width: 280px;
+    height: auto;
+    margin-bottom: .25rem
+}
+
+.tagline {
+    font-size: 1rem;
+    margin-top: .25rem;
+    opacity: .8;
+    color: var(--muted)
+}
+
+.header-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: .25rem
+}
+
+@media (max-width:600px) {
+    header img {
+        width: 220px
+    }
+
+    h2 {
+        font-size: 1.1rem
+    }
+
+    .header-title {
+        font-size: 2rem
+    }
+}
+
+/* Article styles */
+.article {
+    margin: 20px 0;
+}
+
+.article .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+}
+
+/* Post content styles */
+.post-content {
+    margin: 20px 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.post-content ul {
+    margin: 20px 0;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.post-content li {
+    margin-bottom: 8px;
+}
+
+/* WordPress specific styles */
+.wp-block-image {
+    margin: 20px 0;
+}
+
+.wp-block-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 20px;
+}
+
+.alignright {
+    float: right;
+    margin-left: 20px;
+}
