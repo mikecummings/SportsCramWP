@@ -224,6 +224,7 @@
           <li><strong>First 500 Get 50% Off:</strong> Lock in $2.49/month forever—sign up now!</li>
         </ul>
       </section>
+      
     </main>
     <div class="cta">
       <h2>Get Started Free</h2>

@@ -61,6 +61,7 @@
             color: #222;
             line-height: 1.6;
         }
+        header,
         .header {
             background: #004a8d;
             color: #fff;
@@ -68,16 +69,25 @@
             padding: 2rem 1rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        header h1,
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
             font-weight: bold;
         }
+        header .tagline,
+        header .animated-text,
+        .header .tagline,
         .header .animated-text {
             display: inline-block;
             font-size: 1.1rem;
             margin-top: 0.5rem;
             opacity: 0.95;
+        }
+        main {
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: auto;
         }
         .content {
             padding: 2rem 1rem;
@@ -85,9 +95,76 @@
             margin: 0 auto;
             text-align: center;
         }
+        section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #004a8d;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.75rem;
+        }
+        li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            margin-right: 0.5rem;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .premium {
+            background: #fff8e1;
+            border-left: 5px solid #ffca28;
+        }
         .content p {
             font-size: 1.2rem;
             margin-bottom: 20px;
+        }
+        .cta {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #fff;
+            border-top: 1px solid #ccc;
+        }
+        .cta h2 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+        }
+        .cta p {
+            margin-bottom: 1rem;
+        }
+        .cta input[type="email"] {
+            padding: 0.9rem;
+            width: 90%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .cta button {
+            background-color: #f8d210;
+            color: #1e1e2f;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cta button:hover {
+            background-color: #e0bc00;
         }
         .cta-button {
             background-color: #f8d210;
@@ -177,9 +254,16 @@
             text-decoration: none;
             margin: 0 5px;
         }
+        .header-title {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #fff;
+        }
         @media (max-width: 600px) {
-            .header h1 { font-size: 1.8rem; }
-            .header .animated-text { font-size: 1rem; }
+            header h1, .header h1 { font-size: 1.8rem; }
+            header .tagline, header .animated-text, .header .tagline, .header .animated-text { font-size: 1rem; }
+            .header-title { font-size: 3rem; }
+            h2 { font-size: 1.3rem; }
             .signup-form input[type="email"] {
                 padding: 15px;
                 width: 90%;
@@ -267,59 +351,74 @@
 
 <body>
 
-    <div class="thank-you-message" style="display:none;">
-        <p>Thank you for joining the waitlist!</p>
-        <p class="sub">We'll keep you updated on our progress.</p>
+    <div id="thank-you" class="thank-you-message" style="display:none;">
+        <p>Thank you for signing up!</p>
+        <p class="sub">You will start getting emails soon.</p>
     </div>
 
-    <div class="header">
-        <h1>Welcome to Sports Cram</h1>
-        <div class="animated-text-container">
-            <span class="animated-text">Sports Updates for Casual Fans</span>
+    <div id="init">
+        <header>
+            <div class="header-title">Sports Cram</div>
+            <h1>Welcome to Sports Cram</h1>
+            <p class="tagline">Sports Updates for Casual Fans</p>
+        </header>
+        <main>
+            <section>
+        <h2>Why Sports Cram?</h2>
+        <ul>
+          <li><strong>For Busy People:</strong> Skim it in 60 seconds—no time wasted.</li>
+          <li><strong>No Sports Knowledge Needed:</strong> We keep it simple.</li>
+          <li><strong>Be Socially Ready:</strong> Have basic sports current events knowledge.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What You Get</h2>
+        <ul>
+          <li><strong>Weekly Email (1 Minute Read):</strong> No jargon, just the basics.<br><em>Example:</em> “March Madness - college basketball's big tournament is what most people are watching.”</li>
+          <li><strong>What’s In Season:</strong> A quick list of active sports.<br><em>Example:</em> “Basketball, hockey, soccer, baseball (pre-season), golf.”</li>
+          <li><strong>Major Events:</strong> Key dates and surprises.<br><em>Example:</em> “Golf’s Masters runs April 10-13.”</li>
+          <li><strong>Talking Points:</strong> 2-3 lines to sound in-the-know.<br><em>Example:</em> “March Madness - Florida won big last night against Maryland.”</li>
+        </ul>
+      </section>
+      <section class="premium" style="display:none;">
+        <h2>Want More? Go Premium ($4.99/month):</h2>
+        <ul>
+          <li><strong>Your Teams:</strong> Pick teams to follow. <em>Example:</em> “Lakers won big yesterday—they’re playoff-bound!”</li>
+          <li><strong>First 500 Get 50% Off:</strong> Lock in $2.49/month forever—sign up now!</li>
+        </ul>
+      </section>
+        </main>
+        <div class="cta">
+            <h2>Sign up for our newsletter</h2>
+            <p>Enter your email to get started and get relevant sports updates for your region.</p>
+            <form id="signup-form" method="POST" action="/">
+                <input type="hidden" name="recaptcha-token" id="recaptcha-token">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="text" id="b_check_1" name="b_check_1" style="display:none">
+                <button class="g-recaptcha cta-button" data-sitekey="6LcQiNcoAAAAAL2-vWb6oRtrRaIOoX1xqscP5NbZ" data-callback="submitJoinWaitlistForm" data-action="submit">Sign Up</button>
+            </form>
         </div>
     </div>
 
-    <div class="content" id="init">
-        <p>Sports Cram is your go-to platform for understanding sports through daily updates and talking points. Our unique blend of human curation and AI simplifies complex sports information, making it accessible and relatable.</p>
-        <p>With Sports Cram, you gain the confidence to engage in sports discussions, armed with the essential knowledge you need to keep up with significant events without the deep dive.</p>
-        <p>If you're a casual sports fan who wants to stay informed and up-to-date, Sports Cram is the perfect solution for you.</p>
-        <!-- <a href="https://app.sportscram.com">
-            <button class="cta-button">Get Started Now</button>
-        </a> -->
-
-        <p>
-            <!-- <button class="cta-button" onclick="trackEventAndNavigate()">Get Started Now</button> -->
-        <form id="signup-form" class="signup-form" method="POST" action="/">
-            <input type="hidden" name="recaptcha-token" id="recaptcha-token">
-            <input type="email" id="email" name="email" placeholder="Enter your email to join the waitlist" required>
-            <input type="text" id="b_check_1" name="b_check_1" style="display:none">
-
-            <!-- <button type="submit" value="Join the Waitlist" data-sitekey="6LcQiNcoAAAAAL2-vWb6oRtrRaIOoX1xqscP5NbZ"> -->
-            <button class="g-recaptcha btn btn-primary cta-button" data-sitekey="6LcQiNcoAAAAAL2-vWb6oRtrRaIOoX1xqscP5NbZ"
-                data-callback='submitJoinWaitlistForm' data-action='submit'>Join the Waitlist</button>
-        </form>
-        </p>
-
-        <script>
-            function gtag_report_conversion(url) {
-                var callback = function() {
-                    if (typeof(url) != 'undefined') {
-                        window.location = url;
-                    }
-                };
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-801568427/Qsz8CLProOUZEKvtm_4C',
-                        'event_callback': callback
-                    });
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function() {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
                 }
-                return false;
+            };
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-801568427/Qsz8CLProOUZEKvtm_4C',
+                    'event_callback': callback
+                });
             }
-        </script>
-    </div>
+            return false;
+        }
+    </script>
 
-    <div class="content" id="preferences" style="display: none;">
-
+    <div id="preferences" style="display: none;">
+        <main>
         <style>
             .preference {
                 margin: 20px 0;
@@ -370,6 +469,10 @@
                 list-style-type: none;
                 padding: 0;
                 margin-top: 10px;
+            }
+            #selectedRegionsList li::before,
+            #regionSuggestions li::before {
+                content: none;
             }
             #selectedRegionsList li {
                 background-color: #ecf0f1;
@@ -529,8 +632,7 @@
                 gtag_report_conversion();
 
                 const $ = jQuery;
-                $('.header').hide();
-                $('.signup-form').hide();
+                $('#init').hide();
                 $('#preferences').hide();
                 $('.thank-you-message').show();
 
@@ -554,6 +656,7 @@
             });
         </script>
 
+        </main>
     </div>
     <footer style="text-align: center; padding: 20px;">
         <a href="https://www.sportscram.com/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://www.sportscram.com/terms-of-service" target="_blank">Terms of Service</a>
@@ -566,8 +669,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const textElement = document.querySelector('.animated-text');
-            textElement.classList.add('animated');
+            const textElement = document.querySelector('.tagline');
+            if (textElement) textElement.classList.add('animated');
         });
     </script>
 
