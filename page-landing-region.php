@@ -52,145 +52,134 @@
     ?>
 
     <style>
+        /* page-sign-up.php styles applied to landing-two structure */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom right, #fefefe, #e3f2fd);
+            color: #222;
             line-height: 1.6;
         }
-
         .header {
-            background: #1e1e2f;
+            background: #004a8d;
             color: #fff;
-            padding: 60px 20px;
             text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
         .header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            font-weight: bold;
         }
-
         .header .animated-text {
             display: inline-block;
-            font-size: 1.5rem;
-            color: #f8d210;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            opacity: 0.95;
         }
-
         .content {
-            padding: 20px;
-            max-width: 800px;
+            padding: 2rem 1rem;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
-
         .content p {
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
-
         .cta-button {
             background-color: #f8d210;
             color: #1e1e2f;
             padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 1.1rem;
             margin-top: 20px;
             transition: background 0.3s;
         }
-
         .cta-button:hover {
             background-color: #e0bc00;
         }
-
         @keyframes textAnimation {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-
         .animated {
             display: inline-block;
             animation: textAnimation 1s ease-in-out forwards;
             opacity: 0;
         }
-
-        @media (max-width: 600px) {
-            .header h1 {
-                /* font-size: 2rem; */
-            }
-
-            .header .animated-text {
-                font-size: 1.2rem;
-            }
-        }
-
         .recaptcha-container {
             display: flex;
             justify-content: center;
             margin-top: 10px;
-            /* Optional: Add some space between the button and reCAPTCHA */
         }
-
         .signup-form {
-            background-color: #fff;
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* width: 100%; */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
+            border-top: 1px solid #ccc;
         }
-
         .signup-form input[type="email"] {
             width: 90%;
-            padding: 20px;
+            max-width: 300px;
+            padding: 0.9rem;
             margin-bottom: 20px;
-            border: 2px solid #003f8a;
-            border-radius: 4px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             font-size: 1em;
         }
-
-        .signup-form input[type="submit"] {
-            background-color: #0056b3;
-            color: #fff;
+        .signup-form input[type="submit"],
+        .signup-form .cta-button,
+        .signup-form .g-recaptcha {
+            background-color: #f8d210;
+            color: #1e1e2f;
             border: none;
-            font-size: 1em;
-            border-radius: 4px;
+            font-size: 1.1rem;
+            border-radius: 6px;
             cursor: pointer;
-            width: 100%;
+            padding: 15px 30px;
+            transition: background 0.3s;
         }
-
-        .signup-form input[type="submit"]:hover {
-            background-color: blue;
+        .signup-form input[type="submit"]:hover,
+        .signup-form .cta-button:hover,
+        .signup-form .g-recaptcha:hover {
+            background-color: #e0bc00;
         }
-
         .thank-you-message {
-
             background-color: rgba(0, 0, 0, 0.6);
             text-align: center;
-            padding-top: 50px;
+            padding: 50px 20px;
             height: 250px;
+            color: #fff;
         }
-
         .thank-you-message p {
             color: #ffffff !important;
             font: 1.5em sans-serif;
         }
-
         .thank-you-message p.sub {
             color: #ffffff !important;
             font: 1.2em sans-serif;
         }
-
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        footer a {
+            color: #505050;
+            text-decoration: none;
+            margin: 0 5px;
+        }
         @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .header .animated-text { font-size: 1rem; }
             .signup-form input[type="email"] {
                 padding: 15px;
                 width: 90%;
@@ -250,7 +239,7 @@
 
                     let jsonData = {
                         "email": document.getElementsByName('email')[0].value,
-                        "mode": 'landing-page-two'
+                        "mode": 'landing-page-region'
                     };
 
                     jQuery.ajax({
@@ -736,7 +725,7 @@
 
                 let jsonData = {
                     "email": document.getElementsByName('email')[0].value,
-                    "mode": 'landing-page',
+                    "mode": 'landing-page-region',
                     "email_preferences": emailPreferences,
                     "additional_info": document.getElementById('additional_info').value.replace(/<.*?>|script/gi, '')
                     // "email_preferences" : [
