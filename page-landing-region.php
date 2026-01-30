@@ -561,7 +561,7 @@
                     console.log('fetching regions');
                     const response = await fetch(BASE_URL + '/regions');
                     regions = await response.json();
-                    console.log('regions', regions);
+                    //console.log('regions', regions);
                 } catch (error) {
                     console.error("Failed to fetch regions:", error);
                 }
@@ -628,7 +628,7 @@
                     "regions": selectedRegions
                 };
 
-                console.log('jsonData', jsonData);
+                //console.log('jsonData', jsonData);
                 gtag_report_conversion();
 
                 const $ = jQuery;
