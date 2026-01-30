@@ -321,7 +321,6 @@
     <div class="content" id="preferences" style="display: none;">
 
         <style>
-            /* Preference Section Styling */
             .preference {
                 margin: 20px 0;
                 text-align: left;
@@ -330,62 +329,30 @@
                 background-color: #f5f5f5;
                 border-radius: 5px;
             }
-
-            /* Checkbox Styling */
-            .preference input[type="checkbox"] {
-                width: 20px;
-                height: 20px;
-                accent-color: #228ee6;
-                /* Sets the checkbox color in modern browsers */
-                cursor: pointer;
-                margin-right: 10px;
-                /* Adds spacing between the checkbox and label text */
-            }
-
-            .preference input[type="text"] {
-                width: 100%;
-                height: 30px;
-                accent-color: #228ee6;
-                /* Sets the checkbox color in modern browsers */
-                margin-right: 10px;
-                /* Adds spacing between the checkbox and label text */
-            }
-
-
             .preference p {
                 margin-top: 5px;
                 font-size: 0.9em;
                 color: #7f8c8d;
             }
-
-            /* Teams and Sports Selector Styling */
-            .teams-selector,
-            .sports-selector {
-                display: none;
+            .region-selector {
                 margin-top: 10px;
                 position: relative;
             }
-
             .input-wrapper {
                 position: relative;
                 display: flex;
                 align-items: center;
                 width: 100%;
             }
-
             .input-wrapper input[type="text"] {
                 padding: 10px;
                 width: calc(100% - 80px);
-                /* Adjusted width to fit with button */
                 font-size: 1em;
                 border-radius: 5px 0 0 5px;
                 border: 1px solid #ccc;
                 margin-right: -1px;
-                /* Align input with button */
             }
-
-            button[type="submit"],
-            button[type="button"] {
+            button[type="submit"] {
                 padding: 12px 24px;
                 font-size: 1em;
                 background-color: #3498db;
@@ -396,34 +363,15 @@
                 font-weight: bold;
                 transition: background-color 0.3s;
             }
-
             button[type="submit"]:hover {
-                background-color: #3498db;
-            }
-
-            button[type="button"] {
-                padding: 10px;
-                background-color: #3498db;
-                color: white;
-                border: none;
-                border-radius: 0 5px 5px 0;
-                cursor: pointer;
-            }
-
-            button[type="button"]:hover {
                 background-color: #2980b9;
             }
-
-            /* List Styling for Selected Teams and Sports */
-            #favoriteTeamsList,
-            #sportsList {
+            #selectedRegionsList {
                 list-style-type: none;
                 padding: 0;
                 margin-top: 10px;
             }
-
-            #favoriteTeamsList li,
-            #sportsList li {
+            #selectedRegionsList li {
                 background-color: #ecf0f1;
                 margin: 5px 0;
                 padding: 8px;
@@ -432,15 +380,12 @@
                 justify-content: space-between;
                 align-items: center;
             }
-
-            /* Suggestions Dropdown Styling */
-            #suggestions {
+            #regionSuggestions {
                 list-style-type: none;
                 padding: 0;
                 margin: 0;
                 position: absolute;
                 top: 100%;
-                /* Place directly below the input-wrapper */
                 left: 0;
                 width: 100%;
                 background-color: #ffffff;
@@ -449,153 +394,51 @@
                 overflow-y: auto;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 z-index: 100;
+                display: none;
             }
-
-            #suggestions li {
+            #regionSuggestions li {
                 padding: 8px;
                 cursor: pointer;
             }
-
-            #suggestions li:hover {
+            #regionSuggestions li:hover {
                 background-color: #f0f0f0;
             }
-
-            /* Adjusted Remove Team Button */
-            button.remove-team {
-                /* width: auto;  */
+            button.remove-region {
                 max-width: fit-content;
                 display: inline;
                 border-radius: 0;
                 margin-top: 0;
                 padding: 5px 10px;
                 font-size: 0.9em;
+                background-color: #3498db;
+                color: white;
+                border: none;
+                cursor: pointer;
             }
-
-            /* Responsive Styling for Mobile */
+            button.remove-region:hover {
+                background-color: #2980b9;
+            }
             @media (max-width: 768px) {
-                body {
-                    padding: 10px;
-                    /* Reduced padding for mobile */
-                }
-
-                h1 {
-                    font-size: 1.5em;
-                    /* Smaller font size for header */
-                }
-
-                p {
-                    font-size: 0.9em;
-                    /* Reduce general text size slightly */
-                }
-
-                .input-wrapper {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .input-wrapper input[type="text"] {
-                    width: 100%;
-                    border-radius: 5px;
-                    margin-right: 0;
-                }
-
-                button[type="button"] {
-                    width: 100%;
-                    border-radius: 5px;
-                    margin-top: 5px;
-                }
-
-                #suggestions {
-                    position: absolute;
-                    width: 100%;
-                }
-
-                button[type="submit"] {
-                    width: 100%;
-                    font-size: 1em;
-                    margin-top: 15px;
-                }
+                .input-wrapper { flex-direction: column; align-items: flex-start; }
+                .input-wrapper input[type="text"] { width: 100%; border-radius: 5px; margin-right: 0; }
+                button[type="submit"] { width: 100%; font-size: 1em; margin-top: 15px; }
             }
         </style>
         <h1>Sports Cram Preferences</h1>
-        <p>Customize your sports updates. Choose what matters most to you.</p>
+        <p>Choose your region to get relevant sports updates.</p>
 
         <form id="preferencesForm">
-            <!-- Daily Summary Option -->
             <div class="preference">
-                <label>
-                    <input type="checkbox" name="daily_summary" checked>
-                    <strong>Daily Sports Summary</strong>
-                    <p>Receive a daily recap of top sports stories.</p>
-                </label>
-            </div>
-
-            <!-- Big Events Option -->
-            <div class="preference">
-                <label>
-                    <input type="checkbox" name="big_news" checked>
-                    <strong>Big Events</strong>
-                    <p>Receive alerts for major sports events.</p>
-                </label>
-            </div>
-
-            <!-- Game Schedule Option -->
-            <div class="preference">
-                <label>
-                    <input type="checkbox" name="game_schedule">
-                    <strong>Game Schedules</strong>
-                    <p>See upcoming and recent game schedules for your favorite sports.</p>
-                </label>
-            </div>
-
-            <!-- Favorite Teams Option -->
-            <div class="preference">
-                <label>
-                    <input type="checkbox" name="favorite_teams" id="favoriteTeamsCheckbox">
-                    <strong>Updates on My Favorite Teams</strong>
-                    <p>Get news and scores for the teams you care about most.</p>
-                </label>
-                <div class="teams-selector" id="teamsSelector">
+                <strong>Your Region</strong>
+                <p>Select the region you're interested in for localized sports news.</p>
+                <div class="region-selector" id="regionSelector">
                     <div class="input-wrapper">
-                        <input type="text" placeholder="Add a team (e.g., New York Yankees)" id="teamInput">
-                        <ul id="suggestions"></ul>
+                        <input type="text" placeholder="Search for a region (e.g., Washington D.C.)" id="regionInput">
+                        <ul id="regionSuggestions"></ul>
                     </div>
-                    <ul id="favoriteTeamsList"></ul>
+                    <ul id="selectedRegionsList"></ul>
                 </div>
             </div>
-
-            <!-- Choose Sport Option -->
-            <div class="preference">
-                <label>
-                    <input type="checkbox" name="choose_sport" id="chooseSportCheckbox">
-                    <strong>Choose sports you want included in your emails</strong>
-                    <p>Select specific sports to follow closely.</p>
-                </label>
-                <div class="sports-selector" id="sportsSelector">
-                    <ul id="sportsList"></ul>
-                </div>
-            </div>
-
-            <!-- EDU / Facts Option -->
-            <div class="preference">
-                <label>
-                    <input type="checkbox" name="learn" checked>
-                    <strong>Facts and Learning</strong>
-                    <p>Learn sports with little bits of facts.</p>
-                </label>
-            </div>
-
-
-            <!-- Additional Info -->
-            <div class="preference">
-                <label>
-                    <strong>Feedback</strong>
-                    <p>We'd love to hear any feature requests you may have.</p>
-                    <input type="text" id="additional_info" name="additional_info">
-                </label>
-            </div>
-
-            <!-- Submit Button -->
             <button class="cta-button" type="submit">Save Preferences</button>
         </form>
 
@@ -603,314 +446,113 @@
         <script>
             const BASE_URL = 'https://app.sportscram.com/api/pub/v1.0';
 
-            let sports = [];
-            let teams = [];
+            let regions = [];
 
-            const chooseSportCheckbox = document.getElementById('chooseSportCheckbox');
-            const sportsSelector = document.getElementById('sportsSelector');
-            const sportsList = document.getElementById('sportsList');
+            const regionInput = document.getElementById('regionInput');
+            const regionSuggestions = document.getElementById('regionSuggestions');
+            const selectedRegionsList = document.getElementById('selectedRegionsList');
 
-            // // Toggle team selector based on checkbox
-            const favoriteTeamsCheckbox = document.getElementById('favoriteTeamsCheckbox');
-
-            const teamsSelector = document.getElementById('teamsSelector');
-            favoriteTeamsCheckbox.addEventListener('change', function() {
-                teamsSelector.style.display = this.checked ? 'block' : 'none';
-            });
-
-            const teamInput = document.getElementById('teamInput');
-            const suggestions = document.createElement('ul');
-            suggestions.id = 'suggestions';
-            teamInput.parentElement.appendChild(suggestions);
-
-            // Fetch teams from the API and populate the teams array
-            async function fetchTeams() {
+            // Fetch regions from the API (same pattern as fetchTeams but /regions)
+            async function fetchRegions() {
                 try {
-                    const response = await fetch(BASE_URL + '/all_teams');
-                    // const response = await fetch('https://app.sportscram.com/api/pub/v1.0/all_teams');
-                    teams = await response.json(); // Assume the API returns an array of team objects
-                    // console.log("Teams fetched:", teams);
+                    const response = await fetch(BASE_URL + '/regions');
+                    regions = await response.json();
                 } catch (error) {
-                    console.error("Failed to fetch teams:", error);
+                    console.error("Failed to fetch regions:", error);
                 }
             }
 
-            // Call fetchTeams when the page loads
-            fetchTeams();
+            fetchRegions();
 
-            // Show typeahead suggestions based on input
-            teamInput.addEventListener('input', function() {
-                const query = teamInput.value.toLowerCase();
-                suggestions.innerHTML = ''; // Clear any previous suggestions
+            // Typeahead: filter regions by displayName (or name) as user types
+            regionInput.addEventListener('input', function() {
+                const query = regionInput.value.toLowerCase();
+                regionSuggestions.innerHTML = '';
 
-                if (query.length < 2) return; // Only suggest when 2 or more characters are typed
+                if (query.length < 2) return;
 
-                const matchedTeams = teams.filter(team => team.displayName.toLowerCase().includes(query));
+                const matchField = (r) => (r.displayName || r.name || '').toLowerCase().includes(query);
+                const matched = regions.filter(matchField);
 
-                matchedTeams.forEach(team => {
-                    const listItem = document.createElement('li');
-                    let teamVal = '<img style="width:25px;" src="'+team.logo + '"/>&nbsp;' + team.displayName + ' - ' + team.leagueDisplay;
-                    listItem.innerHTML = teamVal;
-                    listItem.addEventListener('click', () => selectTeam(teamVal));
-
-                    suggestions.appendChild(listItem);
+                matched.forEach(region => {
+                    const li = document.createElement('li');
+                    const label = region.displayName || region.name || String(region.id);
+                    li.textContent = label;
+                    li.addEventListener('click', () => selectRegion(region));
+                    regionSuggestions.appendChild(li);
                 });
+                regionSuggestions.style.display = matched.length ? 'block' : 'none';
             });
 
-            // Add selected team to the list and clear suggestions
-            function selectTeam(teamName) {
-                teamInput.value = '';
-                suggestions.innerHTML = '';
+            function selectRegion(region) {
+                regionInput.value = '';
+                regionSuggestions.innerHTML = '';
 
-                // Check if team is already in the list
-                if ([...favoriteTeamsList.children].some(item => item.textContent.includes(teamName))) return;
+                const label = region.displayName || region.name || String(region.id);
+                const already = [...selectedRegionsList.querySelectorAll('li')].some(li => li.getAttribute('data-region-id') === String(region.id));
+                if (already) return;
 
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-    ${teamName}
-    <button type="button" class="remove-team" onclick="removeTeam(this)">Remove</button>
-`;
-                favoriteTeamsList.appendChild(listItem);
+                const li = document.createElement('li');
+                li.setAttribute('data-region-id', region.id);
+                li.innerHTML = label + ' <button type="button" class="remove-region" onclick="removeRegion(this)">Remove</button>';
+                selectedRegionsList.appendChild(li);
 
-                //console.log('add team', teamName);
-                // GA4 event for adding a team
                 if (typeof gtag === 'function') {
-                    gtag('event', 'add_team', {
-                        'event_category': 'team_selection',
-                        'event_label': teamName,
-                        'team_name': teamName,
-                    });
+                    gtag('event', 'add_region', { 'event_category': 'region_selection', 'event_label': label });
                 }
             }
 
-            // Remove team from the list
-            function removeTeam(button) {
-                const teamName = button.parentElement.textContent.replace("Remove", "").trim();
-                button.parentElement.remove();
-
-                // console.log('remove team', teamName);
-                // GA4 event for removing a team
+            function removeRegion(button) {
+                const li = button.parentElement;
+                const label = li.textContent.replace('Remove', '').trim();
+                li.remove();
                 if (typeof gtag === 'function') {
-                    gtag('event', 'remove_team', {
-                        'event_category': 'team_selection',
-                        'event_label': teamName,
-                        'team_name': teamName,
-                    });
+                    gtag('event', 'remove_region', { 'event_category': 'region_selection', 'event_label': label });
                 }
             }
 
-            // Handle form submission
             document.getElementById('preferencesForm').addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                let emailPreferences = [];
+                const selectedRegions = [];
+                selectedRegionsList.querySelectorAll('li').forEach(li => {
+                    const id = li.getAttribute('data-region-id');
+                    const displayName = li.textContent.replace('Remove', '').trim();
+                    if (id != null) selectedRegions.push({ id: id, displayName: displayName });
+                });
 
-                if (document.querySelector('input[name="daily_summary"]').checked) {
-                    emailPreferences.push('digest');
-                }
-
-                if (document.querySelector('input[name="big_news"]').checked) {
-                    emailPreferences.push('alerts');
-                }
-
-                if (document.querySelector('input[name="game_schedule"]').checked) {
-                    emailPreferences.push('gameSchedule');
-                }
-
-                if (document.querySelector('input[name="learn"]').checked) {
-                    emailPreferences.push('learn');
-                }
-
-                //additional_info
-
-                let jsonData = {
+                const jsonData = {
                     "email": document.getElementsByName('email')[0].value,
                     "mode": 'landing-page-region',
-                    "email_preferences": emailPreferences,
-                    "additional_info": document.getElementById('additional_info').value.replace(/<.*?>|script/gi, '')
-                    // "email_preferences" : [
-                    //     "alerts",
-                    //     "digest"
-                    // ]
+                    "regions": selectedRegions
                 };
-                // bigNews | dailySummary | learn | gameSchedule
-
-                // Get selected teams
-                //================================================================================================
-
-                let selectedTeams = [];
-                favoriteTeamsList.querySelectorAll('li').forEach(li => {
-                    let val = li.textContent.replace("Remove", "").trim();
-                    // console.log('val', val);
-                    selectedTeams.push(val);
-                });
-
-                function transformSelectedTeams(teamList, selectedTeams) {
-                    const transformedTeams = {};
-
-                    // Convert the selected teams array to a map for easier lookup
-                    const selectedTeamsMap = selectedTeams.reduce((map, teamString) => {
-                        const [displayName, leagueDisplay] = teamString.split(" - ");
-                        map[displayName.trim()] = leagueDisplay.trim();
-                        return map;
-                    }, {});
-
-                    teamList.forEach(team => {
-                        // Check if the team is in the selectedTeamsMap based on displayName and leagueDisplay
-                        if (selectedTeamsMap[team.displayName] === team.leagueDisplay) {
-                            const key = `${team.sport}_${team.league}_teams`;
-
-                            // Initialize the array if this key doesn't exist yet
-                            if (!transformedTeams[key]) {
-                                transformedTeams[key] = [];
-                            }
-
-                            // Add the selected team in the desired format
-                            transformedTeams[key].push({
-                                id: team.id,
-                                displayName: team.displayName
-                            });
-                        }
-                    });
-
-                    return transformedTeams;
-                }
-
-                const xteams = transformSelectedTeams(teams, selectedTeams);
-                for (const key in xteams) {
-                    jsonData[key] = xteams[key];
-                }
-
-
-                // Get selected sports
-                //================================================================================================
-
-                let selectedLeagues = [];
-
-                function getSportsPreferences(sportsData, selectedLeagues) {
-                    const sportsPreferences = sportsData
-                        .filter(sport => selectedLeagues.includes(sport.name) && sport.active) // Filter by selected leagues and active status
-                        .map(sport => `${sport.sport}@${sport.league}`); // Format as "sport@league"
-
-                    return {
-                        "sports_preferences": sportsPreferences
-                    };
-                }
-
-                // Get selected sports
-                document.querySelectorAll('input[name="sports"]:checked').forEach(checkbox => {
-                    selectedLeagues.push(checkbox.value);
-                });
-
-                const result = getSportsPreferences(sports, selectedLeagues);
-                jsonData.sports_preferences = result.sports_preferences;
-
-                //Now Save
-                //================================================================================================
 
                 console.log('jsonData', jsonData);
-
-                //
                 gtag_report_conversion();
 
-                let $ = jQuery;
-
+                const $ = jQuery;
                 $('.header').hide();
                 $('.signup-form').hide();
                 $('#preferences').hide();
                 $('.thank-you-message').show();
 
-                // GA4 event for form submission
                 if (typeof gtag === 'function') {
-                    gtag('event', 'submit_preferences', {
-                        'event_category': 'form_submission',
-                        'event_label': 'Save Preferences',
-                        'preferences': preferences,
-                    });
+                    gtag('event', 'submit_preferences', { 'event_category': 'form_submission', 'event_label': 'Save Preferences' });
                 }
 
                 $.ajax({
                     type: 'POST',
                     url: 'https://app.sportscram.com/register',
-                    data: JSON.stringify(jsonData), // Ensure jsonData is converted to a JSON string
-                    contentType: 'application/json', // Specify the content type
-                    success: function(response) {
-                        console.log('success', response);
-                    },
-                    error: function(response) {
-                        console.log('err', response);
-                        // alert('Error submitting form. Please try again later.');
-                    }
-                });
-
-            });
-
-            // Track checkbox changes for preference selections
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', (event) => {
-                    const isChecked = event.target.checked;
-                    const checkboxName = event.target.name;
-
-                    // console.log('evt cb', checkboxName);
-                    // console.log('evt v', isChecked);
-                    // GA4 event for each checkbox selection
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'preference_update', {
-                            'event_category': 'preference_selection',
-                            'event_label': checkboxName,
-                            'preference': checkboxName,
-                            'selected': isChecked ? 'true' : 'false',
-                        });
-                    }
+                    data: JSON.stringify(jsonData),
+                    contentType: 'application/json',
+                    success: function(response) { console.log('success', response); },
+                    error: function(response) { console.log('err', response); }
                 });
             });
 
-            // Hide suggestions when clicking outside the input or suggestions dropdown
             document.addEventListener('click', function(event) {
-                //console.log('evt',event.target.id) // "teamInput"
-                const isClickInside = event.target.id == 'teamInput'; //teamInput.contains(event.target) || suggestions.contains(event.target);
-                if (!isClickInside) {
-                    suggestions.style.display = 'none';
-                } else {
-                    suggestions.style.display = 'block';
-                }
-            });
-
-
-            // Fetch sports from the API and populate the sports list
-            async function fetchSports() {
-                try {
-                    const response = await fetch(BASE_URL + '/all_sports'); // Update with actual sports API
-                    sports = await response.json(); // Assume the API returns an array of sport objects
-
-                    console.log("Sports fetched:", sports);
-
-                    // Populate the sports list with checkboxes
-                    sports.forEach(sport => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `
-            <label>
-                <input type="checkbox" name="sports" value="${sport.name}">
-                ${sport.name}
-            </label>
-        `;
-                        sportsList.appendChild(listItem);
-                    });
-                } catch (error) {
-                    console.error("Failed to fetch sports:", error);
-                }
-            }
-
-            // Show or hide sports selector based on checkbox
-            chooseSportCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    sportsSelector.style.display = 'block';
-                    if (!sportsList.hasChildNodes()) {
-                        fetchSports(); // Fetch sports data only once when first checked
-                    }
-                } else {
-                    sportsSelector.style.display = 'none';
-                }
+                const isInside = event.target.id === 'regionInput' || regionSuggestions.contains(event.target);
+                regionSuggestions.style.display = isInside ? 'block' : 'none';
             });
         </script>
 
