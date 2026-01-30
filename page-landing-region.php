@@ -455,8 +455,10 @@
             // Fetch regions from the API (same pattern as fetchTeams but /regions)
             async function fetchRegions() {
                 try {
+                    console.log('fetching regions');
                     const response = await fetch(BASE_URL + '/regions');
                     regions = await response.json();
+                    console.log('regions', regions);
                 } catch (error) {
                     console.error("Failed to fetch regions:", error);
                 }
@@ -464,41 +466,38 @@
 
             fetchRegions();
 
-            // Typeahead: filter regions by displayName (or name) as user types
+            // Typeahead: filter regions (API returns array of strings) as user types
             regionInput.addEventListener('input', function() {
                 const query = regionInput.value.toLowerCase();
                 regionSuggestions.innerHTML = '';
 
                 if (query.length < 2) return;
 
-                const matchField = (r) => (r.displayName || r.name || '').toLowerCase().includes(query);
-                const matched = regions.filter(matchField);
+                const matched = regions.filter(r => String(r).toLowerCase().includes(query));
 
-                matched.forEach(region => {
+                matched.forEach(regionName => {
                     const li = document.createElement('li');
-                    const label = region.displayName || region.name || String(region.id);
-                    li.textContent = label;
-                    li.addEventListener('click', () => selectRegion(region));
+                    li.textContent = regionName;
+                    li.addEventListener('click', () => selectRegion(regionName));
                     regionSuggestions.appendChild(li);
                 });
                 regionSuggestions.style.display = matched.length ? 'block' : 'none';
             });
 
-            function selectRegion(region) {
+            function selectRegion(regionName) {
                 regionInput.value = '';
                 regionSuggestions.innerHTML = '';
 
-                const label = region.displayName || region.name || String(region.id);
-                const already = [...selectedRegionsList.querySelectorAll('li')].some(li => li.getAttribute('data-region-id') === String(region.id));
+                const already = [...selectedRegionsList.querySelectorAll('li')].some(li => li.getAttribute('data-region-id') === String(regionName));
                 if (already) return;
 
                 const li = document.createElement('li');
-                li.setAttribute('data-region-id', region.id);
-                li.innerHTML = label + ' <button type="button" class="remove-region" onclick="removeRegion(this)">Remove</button>';
+                li.setAttribute('data-region-id', regionName);
+                li.innerHTML = regionName + ' <button type="button" class="remove-region" onclick="removeRegion(this)">Remove</button>';
                 selectedRegionsList.appendChild(li);
 
                 if (typeof gtag === 'function') {
-                    gtag('event', 'add_region', { 'event_category': 'region_selection', 'event_label': label });
+                    gtag('event', 'add_region', { 'event_category': 'region_selection', 'event_label': regionName });
                 }
             }
 
@@ -516,9 +515,8 @@
 
                 const selectedRegions = [];
                 selectedRegionsList.querySelectorAll('li').forEach(li => {
-                    const id = li.getAttribute('data-region-id');
-                    const displayName = li.textContent.replace('Remove', '').trim();
-                    if (id != null) selectedRegions.push({ id: id, displayName: displayName });
+                    const name = li.getAttribute('data-region-id');
+                    if (name != null) selectedRegions.push(name);
                 });
 
                 const jsonData = {
